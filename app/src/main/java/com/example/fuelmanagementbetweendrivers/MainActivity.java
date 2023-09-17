@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     TextView userDetails;
     Button logout;
     FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
