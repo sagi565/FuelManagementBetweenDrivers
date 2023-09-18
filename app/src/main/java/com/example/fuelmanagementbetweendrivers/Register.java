@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fuelmanagementbetweendrivers.Classes.Driver;
+import com.example.fuelmanagementbetweendrivers.Classes.Model;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +39,11 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
 
     FirebaseFirestore fireStore;
+
+    Driver currentDriver;
+
+    private Model model = Model.getInstance();
+
 
     @Override
     public void onStart() {
@@ -97,17 +104,21 @@ public class Register extends AppCompatActivity {
 
                                     userID = mAuth.getCurrentUser().getUid();
 
-                                    DocumentReference documentReference = fireStore.collection("users").document(userID);
+                                    DocumentReference documentReference = fireStore.collection("Drivers").document(userID);
 
                                     Map<String, Object> user = new HashMap<>();
 
-                                    user.put("fName", editTextName.getText().toString());
+                                    user.put("Name", editTextName.getText().toString());
+                                    user.put("ID", userID);
+
+                                    currentDriver = new Driver(editTextName.getText().toString(), mAuth.getCurrentUser().getUid());
                                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             Toast.makeText(Register.this, "Account created.", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                                    model.setCurrentDriver(currentDriver);
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
                                     startActivity(intent);
                                     finish();

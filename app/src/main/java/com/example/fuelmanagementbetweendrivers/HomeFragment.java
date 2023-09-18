@@ -21,6 +21,7 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     TextView userDetails;
     Button logout;
+    Button addCar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class HomeFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
         userDetails = view.findViewById(R.id.userDetails);
         auth = FirebaseAuth.getInstance();
-
+        addCar = view.findViewById(R.id.btnAddCar);
         user = auth.getCurrentUser();
         if(user == null){
             Intent intent = new Intent( getActivity().getApplicationContext(), Login.class);
@@ -46,6 +47,14 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent( getActivity().getApplicationContext(), Login.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( getActivity().getApplicationContext(), AddCarActivity.class);
+                startActivity(intent);
+                //getActivity().finish();
             }
         });
         return view;

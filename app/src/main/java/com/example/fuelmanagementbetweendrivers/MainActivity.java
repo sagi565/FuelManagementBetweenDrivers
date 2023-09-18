@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.fuelmanagementbetweendrivers.Classes.Driver;
+import com.example.fuelmanagementbetweendrivers.Classes.Model;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
     DashboardFragment dashboardFragment = new DashboardFragment();
     HistoryFragment historyFragment = new HistoryFragment();
+
+    Driver currentDriver;
+    private Model model = Model.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
