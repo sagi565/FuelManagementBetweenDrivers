@@ -1,6 +1,7 @@
 package com.example.fuelmanagementbetweendrivers.Classes;
 
-import java.util.Arrays;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 public class Driver {
@@ -9,7 +10,8 @@ public class Driver {
     private List<Double> historyKilometersCounter;
     private Double currentKilometersCounter;
 
-    private String driverID;
+    private String documentId;
+
 
 
 
@@ -18,14 +20,21 @@ public class Driver {
         this.car = car;
         this.historyKilometersCounter = historyKilometersCounter;
         this.currentKilometersCounter = currentKilometersCounter;
-        this.driverID = driverID;
+        this.documentId = driverID;
     }
     public Driver(String name, String driverID) {
         this.name = name;
-        this.driverID = driverID;
+        this.documentId = driverID;
     }
 
+    public Driver(String name) {
+        this.name = name;
+    }
     public Driver() {
+    }
+    public Driver(FirebaseUser firebaseUser){
+        documentId = firebaseUser.getUid();
+        name = firebaseUser.getDisplayName();
     }
 
     public String getName() {
@@ -59,11 +68,11 @@ public class Driver {
     public void setCurrentKilometersCounter(Double currentKilometersCounter) {
         this.currentKilometersCounter = currentKilometersCounter;
     }
-    public String getDriverID() {
-        return driverID;
+    public String getDocumentId() {
+        return documentId;
     }
 
-    public void setDriverID(String driverID) {
-        this.driverID = driverID;
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 }

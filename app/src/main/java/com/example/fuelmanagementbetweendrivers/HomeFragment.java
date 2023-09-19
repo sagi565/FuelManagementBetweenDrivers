@@ -9,19 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.fuelmanagementbetweendrivers.Classes.Driver;
+import com.example.fuelmanagementbetweendrivers.Classes.Model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements Model.IModelUpdate{
     FirebaseAuth auth;
-
-    FirebaseUser user;
     TextView userDetails;
     Button logout;
     Button addCar;
+    LinearLayout carDetails;
+    TextView carName, carCode;
+    private Model model = Model.getInstance();
+    private Driver currentDriver = model.getCurrentDriver();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,15 +36,24 @@ public class HomeFragment extends Fragment {
         userDetails = view.findViewById(R.id.userDetails);
         auth = FirebaseAuth.getInstance();
         addCar = view.findViewById(R.id.btnAddCar);
-        user = auth.getCurrentUser();
-        if(user == null){
+        carDetails = view.findViewById(R.id.carDetails);
+        carName = view.findViewById(R.id.carName);
+        carCode = view.findViewById(R.id.carCode);
+
+        if(currentDriver == null){
             Intent intent = new Intent( getActivity().getApplicationContext(), Login.class);
             startActivity(intent);
             getActivity().finish();
         }
+
+        if(currentDriver.getCar() != null){
+            addCar.setVisibility(View.GONE);
+            carDetails.setVisibility(View.VISIBLE);
+
+        }
         else{
-            userDetails.setText(user.getEmail());
-            userDetails.setTextSize(15);
+            carDetails.setVisibility(View.GONE);
+            addCar.setVisibility(View.VISIBLE);
         }
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,5 +73,15 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void driverUpdate() {
+
+    }
+
+    @Override
+    public void carUpdate() {
+
     }
 }

@@ -18,7 +18,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  Model.IModelUpdate {
 
 
     BottomNavigationView bottomNavigationView;
@@ -58,5 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void driverUpdate() {
+
+    }
+
+    @Override
+    public void carUpdate() {
+
     }
 }

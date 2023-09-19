@@ -20,23 +20,85 @@
             android:text="Fuel Management"
             android:textSize="30sp"
             android:padding="20dp"
-            android:layout_marginRight="20dp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="Logout" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnAddCar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+
+        android:text="Add Car" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/carDetails"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border">
+
+        <TextView
+            android:id="@+id/carName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="car name"
+            android:textSize="30sp"
+            android:padding="20dp"
+
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/carCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="car code"
+            android:textSize="30sp"
+            android:padding="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/carKilometerCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Kilometer Counter"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:layout_marginTop="30dp"
-        android:text="Add Car"
-        />
+        android:background="@drawable/round_button"
+        android:text="Start Driving" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Driving"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+ />
 
 </LinearLayout>

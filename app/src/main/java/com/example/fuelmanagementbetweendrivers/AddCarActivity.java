@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fuelmanagementbetweendrivers.Classes.Car;
@@ -49,13 +48,19 @@ public class AddCarActivity extends AppCompatActivity {
                     Toast.makeText(AddCarActivity.this, "Enter code", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Car car = new Car(name, code, model.getCurrentDriver().getDriverID());
-                model.getCurrentDriver().setCar(car);
+                Car car = new Car(name, code, model.getCurrentDriver().getDocumentId());
                 model.addCar(car);
-
+                model.getCurrentDriver().setCar(car);
+                //model.updateCar(car);
                 finish();
 
 
+            }
+        });
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

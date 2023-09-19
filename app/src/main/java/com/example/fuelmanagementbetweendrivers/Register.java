@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity implements Model.IModelUpdate {
     TextInputEditText editTextEmail, editTextPassword, editTextName;
     String userID;
     Button butonReg;
@@ -95,41 +95,19 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
+                model.createUser(email, password, editTextName.getText().toString());
 
-                                    userID = mAuth.getCurrentUser().getUid();
-
-                                    DocumentReference documentReference = fireStore.collection("Drivers").document(userID);
-
-                                    Map<String, Object> user = new HashMap<>();
-
-                                    user.put("Name", editTextName.getText().toString());
-                                    user.put("ID", userID);
-
-                                    currentDriver = new Driver(editTextName.getText().toString(), mAuth.getCurrentUser().getUid());
-                                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(Register.this, "Account created.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                    model.setCurrentDriver(currentDriver);
-                                    Intent intent = new Intent(getApplicationContext(), Login.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(Register.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
             }
         });
+    }
+
+    @Override
+    public void driverUpdate() {
+
+    }
+
+    @Override
+    public void carUpdate() {
+
     }
 }
